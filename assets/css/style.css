@@ -1,46 +1,41 @@
-/* Variáveis */
 :root {
     --primary-color: #6366f1;
-    --secondary-color: #a855f7;
-    --dark-bg: #0f172a;
-    --text-main: #1e293b;
+    --transition-speed: 0.3s;
 }
 
 body {
     font-family: 'Inter', sans-serif;
-    color: var(--text-main);
-    background-color: #fcfcfc;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
 }
 
-/* ACESSIBILIDADE: Destaque para navegação via teclado */
+/* Regras Dark Mode */
+body.dark-mode {
+    background-color: #0f172a;
+    color: #f8fafc;
+}
+
+body.dark-mode .card {
+    background-color: #1e293b;
+    color: #f8fafc;
+    border: 1px solid #334155;
+}
+
+body.dark-mode .bg-light {
+    background-color: #1e293b !important;
+}
+
+body.dark-mode .text-muted {
+    color: #94a3b8 !important;
+}
+
+body.dark-mode .form-select {
+    background-color: #1e293b;
+    color: white;
+    border-color: #334155;
+}
+
+/* Acessibilidade - Foco */
 a:focus, button:focus {
-    outline: 3px solid var(--secondary-color);
+    outline: 3px solid var(--primary-color);
     outline-offset: 2px;
-}
-
-.navbar {
-    background: linear-gradient(90deg, var(--dark-bg) 0%, #1e293b 100%) !important;
-}
-
-.hero-section {
-    padding: 100px 0;
-    background: radial-gradient(circle at top right, #f3f4f6, #ffffff);
-}
-
-.btn-primary {
-    background-color: var(--primary-color);
-    border: none;
-    transition: all 0.3s ease;
-}
-
-.btn-primary:hover {
-    background-color: var(--secondary-color);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
-}
-
-/* Estilo para a frase da API */
-#frase-api {
-    font-size: 1.1rem;
-    min-height: 1.5em;
 }

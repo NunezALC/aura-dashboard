@@ -4,78 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aura | Minha Dashboard de Estudos</title>
-    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand fw-bold" href="#">Aura</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <div class="ms-auto d-flex align-items-center">
+                <button id="dark-mode-toggle" class="btn btn-outline-light btn-sm me-3" aria-label="Alternar modo escuro">
+                    <i class="bi bi-moon-fill"></i>
+                </button>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Cursos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Progresso</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <main>
-        <section class="hero-section text-center py-5">
-            <div class="container">
-                <h1 class="display-4 fw-bold">Domine sua jornada Tech</h1>
-                <p class="lead text-muted">Organize seus estudos de UX e Front-end em um só lugar.</p>
-                <button id="btnComeçar" class="btn btn-primary btn-lg px-4" aria-label="Iniciar interação com a dashboard">Começar Agora</button>
-            </div>
+    <main class="py-5">
+        <section class="container text-center mb-5">
+            <h1 class="display-4 fw-bold">Domine sua jornada Tech</h1>
+            <p class="lead text-muted">Organize seus estudos de UX e Front-end em um só lugar.</p>
+            <button id="btnComeçar" class="btn btn-primary btn-lg px-4">Começar Agora</button>
         </section>
 
         <section class="container mb-5">
             <div class="p-4 bg-light rounded-4 border-start border-primary border-5 shadow-sm text-center">
-                <p id="frase-api" class="fst-italic text-muted mb-0">"Carregando uma dose de inspiração..."</p>
-                <small id="autor-api" class="fw-bold text-primary"></small>
+                <p id="frase-api" class="fst-italic text-muted mb-0">"Carregando inspiração..."</p>
             </div>
         </section>
 
-        <section class="container my-5">
-            <div class="row mb-4">
-                <div class="col-12 text-center">
-                    <h2 class="fw-bold">Meus Módulos de Especialização</h2>
-                    <p class="text-muted">Conteúdo gerado dinamicamente a partir de objetos JavaScript.</p>
+        <section class="container mb-5">
+            <div class="row g-3 align-items-center">
+                <div class="col-md-8">
+                    <label class="fw-bold mb-2">Seu Progresso Geral:</label>
+                    <div class="progress" style="height: 25px;">
+                        <div id="barra-progresso" class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 0%">0%</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label class="fw-bold mb-2">Filtrar por Status:</label>
+                    <select id="filtro-status" class="form-select">
+                        <option value="todos">Todos os Módulos</option>
+                        <option value="Concluído">Concluídos</option>
+                        <option value="Em progresso">Em progresso</option>
+                    </select>
                 </div>
             </div>
-            <section class="container mb-4">
-    <div class="row align-items-center g-3">
-        <div class="col-md-8">
-            <label class="fw-bold mb-2">Seu Progresso Geral:</label>
-            <div class="progress" style="height: 25px;">
-                <div id="barra-progresso" class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 0%">0%</div>
-            </div>
-        </div>
-        <div class="col-md-4 text-md-end">
-            <select id="filtro-status" class="form-select border-primary">
-                <option value="todos">Todos os Módulos</option>
-                <option value="Concluído">Concluídos</option>
-                <option value="Em progresso">Em progresso</option>
-            </select>
-        </div>
-    </div>
-</section>
+        </section>
 
+        <section class="container">
             <div id="container-cards" class="row g-4"></div>
         </section>
     </main>
 
-    <footer class="bg-dark text-white text-center py-4">
+    <footer class="bg-dark text-white text-center py-4 mt-5">
         <div class="container">
             <p class="mb-0">&copy; 2026 Aura Dashboard | Criado por Dorgivaldo Nunes.</p>
         </div>
