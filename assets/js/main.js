@@ -20,14 +20,33 @@ const meusCursos = [
     }
 ];
 
-// 2. Renderizar Cards
-function carregarCursos() {
+// 2. Função para Atualizar a Barra de Progresso Geral
+function atualizarProgresso() {
+    const total = meusCursos.length;
+    const concluidos = meusCursos.filter(c => c.status === "Concluído").length;
+    const porcentagem = Math.round((concluidos / total) * 100);
+    
+    const barra = document.getElementById('barra-progresso');
+    if (barra) {
+        barra.style.width = `${porcentagem}%`;
+        barra.innerText = `${porcentagem}%`;
+        barra.setAttribute('aria-valuenow', porcentagem);
+    }
+}
+
+// 3. Renderizar Cards com suporte a Filtro
+function carregarCursos(filtro = "todos") {
     const container = document.getElementById('container-cards');
     if (!container) return;
 
-    container.innerHTML = meusCursos.map(curso => `
+    // Lógica de Filtro
+    const cursosFiltrados = filtro === "todos" 
+        ? meusCursos 
+        : meusCursos.filter(c => c.status === filtro);
+
+    container.innerHTML = cursosFiltrados.map(curso => `
         <div class="col-md-4">
-            <div class="card h-100 shadow-sm border-0">
+            <div class="card h-100 shadow-sm border-0 border-top border-4 border-${curso.cor}">
                 <div class="card-body p-4 text-center">
                     <h5 class="fw-bold text-primary">${curso.titulo}</h5>
                     <p class="text-muted small">${curso.desc}</p>
@@ -38,9 +57,12 @@ function carregarCursos() {
             </div>
         </div>
     `).join('');
+
+    // Sempre que renderizamos, atualizamos o progresso geral
+    atualizarProgresso();
 }
 
-// 3. Consumo de API (Frase Motivacional)
+// 4. Consumo de API (Frase Motivacional)
 async function buscarInspiracao() {
     const pFrase = document.getElementById('frase-api');
     try {
@@ -52,7 +74,7 @@ async function buscarInspiracao() {
     }
 }
 
-// 4. Interação do Botão
+// 5. Interações e Eventos
 const btn = document.getElementById('btnComeçar');
 if (btn) {
     btn.addEventListener('click', () => {
@@ -61,6 +83,14 @@ if (btn) {
             btn.innerText = `Bora focar, ${nome}!`;
             alert(`Bem-vindo, ${nome}! Vamos construir sua carreira.`);
         }
+    });
+}
+
+// Escuta a mudança no Select de Filtro
+const selectFiltro = document.getElementById('filtro-status');
+if (selectFiltro) {
+    selectFiltro.addEventListener('change', (e) => {
+        carregarCursos(e.target.value);
     });
 }
 
